@@ -16,6 +16,7 @@ import {
   HeartPulse, 
   Check, 
   Shield, 
+  Chart, 
   Calendar,
   Activity,
   Clipboard

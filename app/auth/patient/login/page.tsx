@@ -5,29 +5,24 @@ import Navbar from '@/components/Navbar';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { User, Lock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useAppDispatch , useAppSelector } from '@/app/redux/hooks';
-import { login , logout } from '@/app/redux/slices/authSlice';
+
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
+
 export default function PatientLoginPage() {
   const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(formSchema)
   });
-  const dispatch = useAppDispatch()
+
   const onSubmit = (data: any) => {
     console.log('Patient Login Data:', data);
-    dispatch(login())
-    router.push("/patient/dashboard")
-    
+    // Add your login logic here
   };
-
-  const router = useRouter();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
