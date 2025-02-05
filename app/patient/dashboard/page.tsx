@@ -6,6 +6,8 @@ import {
   Shield, Bed, Droplet, BrainCircuit, ChevronDown, ChevronUp ,Clock, Pill, AlertCircle, HeartPulse, ClipboardList, Star, Stethoscope
 } from "lucide-react";
 
+import { useAppDispatch,useAppSelector } from "@/app/redux/hooks";
+
 const Sidebar = ({ isCollapsed, toggleSidebar }: { isCollapsed: boolean; toggleSidebar: () => void }) => {
   const [isServicesOpen, setIsServicesOpen] = useState(true);
 
@@ -105,6 +107,8 @@ export default function PatientDashboard() {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const patient = useAppSelector(state=>state.auth.patient)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#eef2f7] to-[#d0d8e5] text-gray-900">
       <Sidebar isCollapsed={isCollapsed} toggleSidebar={() => setIsCollapsed(!isCollapsed)} />
@@ -116,7 +120,7 @@ export default function PatientDashboard() {
               <User className="w-8 h-8 text-blue-600" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Welcome, John Doe</h1>
+              <h1 className="text-3xl font-bold">Welcome, {patient?.fullName}</h1>
               <p className="text-gray-600">Your Personal Health Dashboard</p>
             </div>
           </div>
