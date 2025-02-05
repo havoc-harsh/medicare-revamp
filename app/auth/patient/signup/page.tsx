@@ -6,6 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { User, Lock, Mail, Phone, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useAppDispatch,useAppSelector } from '@/app/redux/hooks';
+import { signup } from '@/app/redux/slices/authSlice';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   fullName: z.string().min(3, "Name must be at least 3 characters"),
@@ -27,9 +30,12 @@ export default function PatientSignupPage() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(formSchema)
   });
-
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const onSubmit = (data: any) => {
     console.log('Patient Signup Data:', data);
+    dispatch(signup(data));
+    router.push("/patient/dashboard")
   };
 
   return (

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Patient {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
   token: string;
 }
@@ -21,16 +21,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<Patient>) => {
-      state.patient = action.payload;
+    login: (state) => {
       state.isAuthenticated = true;
     },
     logout: (state) => {
       state.patient = null;
       state.isAuthenticated = false;
     },
+    signup : (state,action)=>{
+        state.patient = action.payload;
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout , signup } = authSlice.actions;
 export const authReducer = authSlice.reducer;
